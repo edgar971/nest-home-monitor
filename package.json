@@ -1,0 +1,18 @@
+{
+  "name": "nest-home-monitor",
+  "version": "1.0.0",
+  "description": "Nest Home data",
+  "main": "index.js",
+  "author": "Edgar Pino ",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha --recursive --reporter spec ./tests/**/*.specs.js",
+    "test:watch": "yarn test --watch --watch-extensions js",
+    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js' 'tests/**/*.js'"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "prettier": "1.16.3"
+  }
+}
