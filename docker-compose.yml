@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  influxdb:
+    image: influxdb
+    ports:
+      - '8086:8086'
+    environment:
+      - INFLUXDB_DB="nest_stats"
+      - INFLUXDB_ADMIN_USER="epb"
+      - INFLUXDB_ADMIN_PASSWORD="123"
+    volumes:
+      - influx-data:/var/lib/influxdb
+  chronograf:
+    image: chronograf
+    links: 
+      - influxdb
+    ports:
+      - '8888:8888'
+    volumes:
+      - chronograf-data:/var/lib/influxdb
+    command: chronograf --influxdb-url=http://influxdb:8086
+
+volumes:
+  influx-data:
+  chronograf-data:
