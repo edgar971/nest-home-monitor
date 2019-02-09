@@ -16,7 +16,7 @@ services:
     links: 
       - influxdb
     ports:
-      - '8888:8888'
+      - '8881:8888'
     volumes:
       - chronograf-data:/var/lib/influxdb
     command: chronograf --influxdb-url=http://influxdb:8086
