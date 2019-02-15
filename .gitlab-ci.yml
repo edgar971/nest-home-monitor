@@ -1,0 +1,12 @@
+image: node:10.15.1-alpine
+
+test: 
+  script:
+    - yarn install
+    - yarn test
+  variables: 
+    NEST_AUTHORIZATION_KEY: "123"
+    NEST_DEVICE_ID: "123"
+    INFLUX_HOST: "123"
+    INFLUX_DATABASE: "123"
+    PUBLISH_INTERVAL: "123"
