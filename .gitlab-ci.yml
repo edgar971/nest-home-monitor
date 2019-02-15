@@ -6,6 +6,7 @@ services:
 stages:
   - test
   - build
+  - push_image
 
 test: 
   image: node:10.15.1-alpine
@@ -21,3 +22,11 @@ build_image:
   stage: build
   script:
     - docker build -t registry.gitlab.com/edgarpino/nest-home-monitor .
+
+push_image:
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+  stage: push_image
+  script:
+    - docker push registry.gitlab.com/edgarpino/nest-home-monitor:latest
+
