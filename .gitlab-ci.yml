@@ -1,10 +1,11 @@
-image: node:10.15.1-alpine
+image: docker:latest
 
 stages:
   - test
   - build
 
 test: 
+  image: node:10.15.1-alpine
   stage: test
   script:
     - mv .env.test .env
@@ -16,5 +17,3 @@ build_image:
   image: docker:dind
   script:
     - docker build -t registry.gitlab.com/edgarpino/nest-home-monitor .
-    - docker push registry.gitlab.com/edgarpino/nest-home-monitor
-
