@@ -1,2 +1,2 @@
-# Nest Home Monitor
+# Nest Home Monitor [![pipeline status](https://gitlab.com/edgarpino/nest-home-monitor/badges/master/pipeline.svg)](https://gitlab.com/edgarpino/nest-home-monitor/commits/master)
 A simple Node.js app that pulls Nest metrics and sends them to influx. 

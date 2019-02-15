@@ -1,13 +1,19 @@
 image: node:10.15.1-alpine
 
+stages:
+  - test
+  - build
+
 test: 
+  stage: test
   script:
     - mv .env.test .env
     - yarn install
     - yarn test
-  variables: 
-    NEST_AUTHORIZATION_KEY: "123"
-    NEST_DEVICE_ID: "123"
-    INFLUX_HOST: "123"
-    INFLUX_DATABASE: "123"
-    PUBLISH_INTERVAL: "123"
+
+ build_image:
+   stage: build
+   script:
+     - docker build -t registry.gitlab.com/edgarpino/nest-home-monitor .
+     - docker push registry.gitlab.com/edgarpino/nest-home-monitor
+
