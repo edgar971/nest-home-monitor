@@ -2,6 +2,7 @@ image: node:10.15.1-alpine
 
 test: 
   script:
+    - mv .env.test .env
     - yarn install
     - yarn test
   variables: 
