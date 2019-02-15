@@ -5,8 +5,7 @@ services:
 
 stages:
   - test
-  - build
-  - push_image
+  - build_and_push
 
 test: 
   image: node:10.15.1-alpine
@@ -17,21 +16,9 @@ test:
     - yarn test
 
 build_image:
-  artifacts:
-    paths:
-      - docker-images
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
-  stage: build
+  stage: build_and_push
   script:
     - docker build -t registry.gitlab.com/edgarpino/nest-home-monitor .
-    - docker save registry.gitlab.com/edgarpino/nest-home-monitor:latest > docker-images/app.tar
-
-push_image:
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
-  stage: push_image
-  script:
-    - docker load -i docker-images/app.tar
     - docker push registry.gitlab.com/edgarpino/nest-home-monitor:latest
-
