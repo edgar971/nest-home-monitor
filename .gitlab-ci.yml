@@ -1,5 +1,8 @@
 image: docker:latest
 
+services:
+  - docker:dind
+
 stages:
   - test
   - build
@@ -13,6 +16,8 @@ test:
     - yarn test
 
 build_image:
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   stage: build
   script:
     - docker build -t registry.gitlab.com/edgarpino/nest-home-monitor .
