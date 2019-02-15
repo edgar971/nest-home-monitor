@@ -28,10 +28,10 @@ build_image:
     - docker save registry.gitlab.com/edgarpino/nest-home-monitor:latest > docker-images/app.tar
 
 push_image:
-  - docker load -i docker-images/app.tar
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   stage: push_image
   script:
+    - docker load -i docker-images/app.tar
     - docker push registry.gitlab.com/edgarpino/nest-home-monitor:latest
 
