@@ -11,9 +11,9 @@ test:
     - yarn install
     - yarn test
 
- build_image:
-   stage: build
-   script:
-     - docker build -t registry.gitlab.com/edgarpino/nest-home-monitor .
-     - docker push registry.gitlab.com/edgarpino/nest-home-monitor
+build_image:
+  stage: build
+  script:
+    - docker build -t registry.gitlab.com/edgarpino/nest-home-monitor .
+    - docker push registry.gitlab.com/edgarpino/nest-home-monitor
 
