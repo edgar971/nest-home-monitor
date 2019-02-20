@@ -23,6 +23,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^6.2.0",
+    "eventsource": "^1.0.7",
     "influx": "^5.0.0-alpha.4"
   }
 }
