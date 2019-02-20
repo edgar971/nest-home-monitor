@@ -21,7 +21,8 @@ context('#handles/handleNestEvents specs', () => {
 
   describe('when handling event successfully', () => {
     beforeEach(async () => {
-      await handleNestEvents(nestData)
+      const nestResponse = { data: JSON.stringify({ data: nestData }) }
+      await handleNestEvents(nestResponse)
     })
 
     it('calls the camera event handler', () =>
