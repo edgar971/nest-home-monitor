@@ -6,7 +6,7 @@ async function handleNestEvents(eventData) {
   }
 
   const { cameras, thermostats } = JSON.parse(eventData.data).data
-
+  
   if (cameras) {
     await handlers.handleCamera(cameras)
   }
