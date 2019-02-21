@@ -7,10 +7,10 @@
   "license": "MIT",
   "scripts": {
     "start": "node main.js",
-    "test": "mocha --recursive --reporter spec ./tests/**/*.specs.js  ./tests/*.specs.js",
+    "test": "mocha --recursive --reporter spec ./tests/**/*.specs.js",
     "test:watch": "yarn test --watch --watch-extensions js",
     "format": "prettier --config ./.prettierrc --write 'src/**/*.js' 'tests/**/*.js'",
-    "postinstall": "cp .env.example .env"
+    "env": "cp .env.example .env"
   },
   "devDependencies": {
     "chai": "^4.2.0",
