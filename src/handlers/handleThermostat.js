@@ -20,7 +20,7 @@ async function handleThermostat(data) {
   const influxPoints = mapToInfluxPoints(data)
 
   if (!!influxPoints.length) {
-    await influxRepo.sendToInflux(influxPoints)
+    await influxRepo.writeToInflux(influxPoints)
   }
 }
 

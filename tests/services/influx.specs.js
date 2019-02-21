@@ -3,14 +3,14 @@ const sinonChai = require('sinon-chai')
 const sinon = require('sinon')
 
 const influxWrapper = require('../../src/wrappers/influx')
-const { sendToInflux } = require('../../src/repositories/influx')
+const { writeToInflux } = require('../../src/repositories/influx')
 
 const { expect } = chai
 chai.use(sinonChai)
 
 const sandbox = sinon.createSandbox()
 
-context('#services/repositories/sendToInflux specs', () => {
+context('#services/repositories/writeToInflux specs', () => {
   describe('when sending metrics to influx', () => {
     const points = [
       {
@@ -35,7 +35,7 @@ context('#services/repositories/sendToInflux specs', () => {
         .stub(influxWrapper, 'connectToInflux')
         .returns({ writePoints: influxWriteStub })
 
-      await sendToInflux(points)
+      await writeToInflux(points)
     })
 
     afterEach(() => {
@@ -46,5 +46,26 @@ context('#services/repositories/sendToInflux specs', () => {
       expect(influxWriteStub).to.be.calledWithExactly(points, {
         precision: 'ms',
       }))
+  })
+  describe('when failing to connect to infux', () => {
+    beforeEach(async () => {
+      influxWriteStub = sandbox.stub().rejects()
+      sandbox.stub(console, 'log')
+
+      sandbox
+        .stub(influxWrapper, 'connectToInflux')
+        .returns({ writePoints: influxWriteStub })
+
+      await writeToInflux([])
+    })
+
+    afterEach(() => {
+      sandbox.restore()
+    })
+    it('write the metrics to influx', () =>
+      expect(influxWriteStub).to.be.calledWithExactly([], {
+        precision: 'ms',
+      }))
+    it('logs to the console', () => expect(console.log).to.be.called)
   })
 })

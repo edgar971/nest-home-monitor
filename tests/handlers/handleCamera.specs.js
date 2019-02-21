@@ -14,7 +14,7 @@ const sandbox = sinon.createSandbox()
 
 context('#handlers/handleCamera specs', () => {
   beforeEach(() => {
-    sandbox.stub(influxRepo, 'sendToInflux').resolves()
+    sandbox.stub(influxRepo, 'writeToInflux').resolves()
   })
 
   afterEach(() => {
@@ -38,7 +38,7 @@ context('#handlers/handleCamera specs', () => {
     })
 
     it('saves to influx', () =>
-      expect(influxRepo.sendToInflux.args[0][0])
+      expect(influxRepo.writeToInflux.args[0][0])
         .excluding('timestamp')
         .to.deep.equal(expectedInfluxPoints))
   })
@@ -49,6 +49,6 @@ context('#handlers/handleCamera specs', () => {
     })
 
     it('does not save to influx', () =>
-      expect(influxRepo.sendToInflux).to.not.be.called)
+      expect(influxRepo.writeToInflux).to.not.be.called)
   })
 })
