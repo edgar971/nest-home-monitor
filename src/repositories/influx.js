@@ -5,7 +5,7 @@ async function writeToInflux(dataPoints) {
     influx = await influxWrapper.connectToInflux()
     await influx.writePoints(dataPoints, { precision: 'ms' })
   } catch (error) {
-    console.log(`Connecting or sending to influx failed: ${error.message}`)
+    console.error(`Connecting or sending to influx failed: ${error.message}`)
   }
 }
 

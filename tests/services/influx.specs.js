@@ -50,7 +50,7 @@ context('#services/repositories/writeToInflux specs', () => {
   describe('when failing to connect to infux', () => {
     beforeEach(async () => {
       influxWriteStub = sandbox.stub().rejects()
-      sandbox.stub(console, 'log')
+      sandbox.stub(console, 'error')
 
       sandbox
         .stub(influxWrapper, 'connectToInflux')
@@ -66,6 +66,6 @@ context('#services/repositories/writeToInflux specs', () => {
       expect(influxWriteStub).to.be.calledWithExactly([], {
         precision: 'ms',
       }))
-    it('logs to the console', () => expect(console.log).to.be.called)
+    it('logs to the console', () => expect(console.error).to.be.called)
   })
 })
